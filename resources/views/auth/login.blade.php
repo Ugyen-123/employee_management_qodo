@@ -21,20 +21,21 @@
                 @csrf
                 
                 <div class="mb-3">
-                    <label for="employee_id" class="form-label">
-                        <i class="bi bi-person-badge me-1"></i>Employee ID
+                    <label for="login" class="form-label">
+                        <i class="bi bi-person-badge me-1"></i>Employee ID or Email
                     </label>
                     <input type="text" 
-                           class="form-control @error('employee_id') is-invalid @enderror" 
-                           id="employee_id"
-                           name="employee_id" 
-                           value="{{ old('employee_id') }}" 
-                           placeholder="Enter your employee ID"
+                           class="form-control @error('login') is-invalid @enderror" 
+                           id="login"
+                           name="login" 
+                           value="{{ old('login') }}" 
+                           placeholder="Enter your employee ID or email"
                            required 
                            autofocus>
-                    @error('employee_id')
+                    @error('login')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                    <small class="text-muted">You can use either your 12-digit Employee ID or email address</small>
                 </div>
 
                 <div class="mb-3">

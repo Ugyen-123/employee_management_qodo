@@ -19,12 +19,13 @@ class EmployeeAuthTest extends TestCase
     public function test_employee_login_fails_with_wrong_credentials(): void
     {
         $employee = Employee::factory()->create([
-            'employee_id' => '123456789012', // 12 digits
+            'employee_id' => '123456789012',
+            'email' => 'test@example.com',
             'password' => bcrypt('password123'),
         ]);
 
         $response = $this->post('/login', [
-            'employee_id' => '123456789012',
+            'login' => '123456789012',
             'password' => 'wrongpassword',
         ]);
 
@@ -32,15 +33,33 @@ class EmployeeAuthTest extends TestCase
         $this->assertGuest('employees');
     }
 
-    public function test_employee_login_succeeds_with_correct_credentials(): void
+    public function test_employee_login_succeeds_with_employee_id(): void
     {
         $employee = Employee::factory()->create([
-            'employee_id' => '123456789012', // 12 digits
+            'employee_id' => '123456789012',
+            'email' => 'test@example.com',
             'password' => bcrypt('password123'),
         ]);
 
         $response = $this->post('/login', [
+            'login' => '123456789012',
+            'password' => 'password123',
+        ]);
+
+        $response->assertRedirect('/dashboard');
+        $this->assertAuthenticatedAs($employee, 'employees');
+    }
+
+    public function test_employee_login_succeeds_with_email(): void
+    {
+        $employee = Employee::factory()->create([
             'employee_id' => '123456789012',
+            'email' => 'test@example.com',
+            'password' => bcrypt('password123'),
+        ]);
+
+        $response = $this->post('/login', [
+            'login' => 'test@example.com',
             'password' => 'password123',
         ]);
 
