@@ -8,7 +8,7 @@
     <p><strong>Name:</strong> {{ $employee->name }}</p>
     <p><strong>Email:</strong> {{ $employee->email }}</p>
     <p><strong>Position:</strong> {{ $employee->position }}</p>
-    <p><strong>Salary:</strong> ${{ number_format($employee->salary, 2) }}</p>
+    <p><strong>Salary:</strong> Nu.{{ number_format($employee->salary, 2) }}</p>
     <a href="{{ route('admin.employees.edit', $employee) }}" class="btn btn-primary">Edit</a>
     <a href="{{ route('admin.employees.index') }}" class="btn btn-secondary">Back</a>
   </div>

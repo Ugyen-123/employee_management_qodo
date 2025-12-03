@@ -7,7 +7,7 @@
   <p><strong>Employee ID:</strong> {{ $employee->employee_id }}</p>
   <p><strong>Email:</strong> {{ $employee->email }}</p>
   <p><strong>Position:</strong> {{ $employee->position ?? 'N/A' }}</p>
-  <p><strong>Salary:</strong> ${{ number_format($employee->salary, 2) }}</p>
+  <p><strong>Salary:</strong> Nu.{{ number_format($employee->salary, 2) }}</p>
 
   <a href="{{ route('employees.profile') }}" class="btn btn-secondary me-2">Edit My Profile</a>
   @auth('admin')

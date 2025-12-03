@@ -59,11 +59,9 @@
                             Remember me
                         </label>
                     </div>
-                    {{-- Uncomment when admin password reset is ready
                     <a href="{{ route('admin.password.request') }}" class="forgot-password">
                         Forgot Password?
                     </a>
-                    --}}
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100 mb-3">

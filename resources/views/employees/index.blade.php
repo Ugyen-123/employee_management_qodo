@@ -29,7 +29,7 @@
               <td>{{ $emp->name }}</td>
               <td>{{ $emp->email }}</td>
               <td>{{ $emp->position }}</td>
-              <td>${{ number_format($emp->salary, 2) }}</td>
+              <td>Nu.{{ number_format($emp->salary, 2) }}</td>
               <td class="text-end">
                 <a href="{{ route('admin.employees.show', $emp) }}" class="btn btn-sm btn-info">View</a>
                 <a href="{{ route('admin.employees.edit', $emp) }}" class="btn btn-sm btn-primary">Edit</a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\PasswordResetController as AdminPasswordResetController;
 
 // Root redirect
 Route::get('/', function () {
@@ -46,6 +47,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+    // Admin Password Reset (Guest)
+    Route::get('/password/forgot', [AdminPasswordResetController::class, 'showLinkRequestForm'])->name('admin.password.request');
+    Route::post('/password/email', [AdminPasswordResetController::class, 'sendResetLinkEmail'])->name('admin.password.email');
+    Route::get('/password/reset/{token}', [AdminPasswordResetController::class, 'showResetForm'])->name('admin.password.reset');
+    Route::post('/password/reset', [AdminPasswordResetController::class, 'reset'])->name('admin.password.update');
 });
 
 // Admin Protected Routes
