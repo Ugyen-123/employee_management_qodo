@@ -10,15 +10,19 @@ class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        Employee::updateOrCreate(
-            ['employee_id' => 'E1001'],
-            [
-                'name' => 'John Doe',
-                'email' => 'john@example.com',
-                'position' => 'Engineer',
-                'salary' => 75000,
-                'password' => Hash::make('password'),
-            ]
-        );
+        // Create test employees
+        Employee::create([
+            'employee_id' => '123456789012',
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+            'password' => Hash::make('password123'),
+        ]);
+
+        Employee::create([
+            'employee_id' => '987654321098',
+            'name' => 'Jane Smith',
+            'email' => 'jane@example.com',
+            'password' => Hash::make('password123'),
+        ]);
     }
 }

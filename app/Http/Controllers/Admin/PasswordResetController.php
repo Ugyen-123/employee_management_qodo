@@ -69,7 +69,7 @@ class PasswordResetController extends Controller
 
         $row = DB::table('admin_password_resets')->where('email', $request->email)->first();
         if (!$row) {
-            return back()->withErrors(['email' => 'Invalid or expired token.']);
+            return back()->withErrors(['token' => 'Invalid or expired token.']);
         }
 
         // TTL 60 minutes

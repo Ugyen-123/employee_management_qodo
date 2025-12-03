@@ -9,19 +9,14 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
-        if (Auth::guard('employees')->check()) {
-            return redirect()->route('dashboard');
-        }
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
         $request->validate([
-            'employee_id' => ['required', 'regex:/^\d{12}$/'],
-            'password' => ['required', 'string'],
-        ], [
-            'employee_id.regex' => 'Employee ID must be exactly 12 digits.',
+            'employee_id' => 'required|digits:12',
+            'password' => 'required',
         ]);
 
         $credentials = [
@@ -29,12 +24,14 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
-        if (Auth::guard('employees')->attempt($credentials, $request->boolean('remember'))) {
+        if (Auth::guard('employees')->attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
             return redirect()->intended(route('dashboard'));
         }
 
-        return back()->withErrors(['employee_id' => 'Invalid credentials.'])->withInput();
+        return back()->withErrors([
+            'employee_id' => 'The provided credentials do not match our records.',
+        ])->withInput($request->only('employee_id'));
     }
 
     public function logout(Request $request)

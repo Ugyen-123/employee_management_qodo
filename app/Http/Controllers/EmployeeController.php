@@ -22,6 +22,8 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+        #dd($request->all());
+
         $data = $request->validate([
             'employee_id' => ['required','regex:/^\d{12}$/','unique:employees,employee_id'],
             'name'        => ['required','string','max:255'],
