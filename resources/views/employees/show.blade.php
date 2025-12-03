@@ -9,8 +9,8 @@
     <p><strong>Email:</strong> {{ $employee->email }}</p>
     <p><strong>Position:</strong> {{ $employee->position }}</p>
     <p><strong>Salary:</strong> ${{ number_format($employee->salary, 2) }}</p>
-    <a href="{{ route('employees.edit', $employee) }}" class="btn btn-primary">Edit</a>
-    <a href="{{ route('employees.index') }}" class="btn btn-secondary">Back</a>
+    <a href="{{ route('admin.employees.edit', $employee) }}" class="btn btn-primary">Edit</a>
+    <a href="{{ route('admin.employees.index') }}" class="btn btn-secondary">Back</a>
   </div>
 </div>
 @endsection
